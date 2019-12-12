@@ -26,7 +26,7 @@ UPDATE teacher SET function = 'Профессор' WHERE function = 'Доцен�
 
 
 --Ошибка при нарушении ограничения-проверки
-UPDATE groups SET number_of_students = number_of_students * 1.5;
+UPDATE groups SET number_of_students = number_of_students * (-1.5);
 
 
 --Удалить кабинеты с количеством мест меньше 20
@@ -37,6 +37,6 @@ DELETE FROM classroom WHERE number_of_seats < 20;
 DELETE FROM groups WHERE group_id = (SELECT max(group_id) from groups);
 
 
-
+--Вствить нового преподавателя, если уже существует такой преподаватель - обновить его должность
 INSERT INTO teacher (teacher_id,first_name, last_name, function) VALUES (13,'Власов','Михаил','Профессор')
 ON CONFLICT (last_name,first_name) DO UPDATE SET function = 'Доцент';
